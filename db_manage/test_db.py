@@ -1,8 +1,8 @@
 from dotenv import dotenv_values
 
-from bot_types import GROUP_INFO, NOTIFICATION_INFO
-from db_helpers import add_group_to_notifications_db, add_notification_to_group_db, add_notification_to_table, delete_notification_from_table, get_all_groups_rows, get_all_notifications_rows, get_group_row_by_id, get_notification_row_by_id, remove_group_from_notifications_db, remove_notification_from_group_db, trigger_group_bot_status
-from db_purge import clear_db
+from helpers.bot_types import GROUP_INFO, NOTIFICATION_INFO
+from db_manage.db_helpers import add_group_to_notifications_db, add_notification_to_group_db, add_notification_to_table, delete_notification_from_table, get_all_groups_rows, get_all_notifications_rows, get_group_row_by_id, get_notification_row_by_id, remove_group_from_notifications_db, remove_notification_from_group_db, trigger_group_bot_status
+from db_manage.db_purge import clear_db
 from helpers.helpers import return_id_from_str
 
 bot_config = dotenv_values(".env")

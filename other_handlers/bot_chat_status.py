@@ -3,8 +3,8 @@ from telegram.ext import CallbackContext
 
 from typing import Tuple, Optional
 
-from db_helpers import remove_group_from_db, trigger_group_bot_status
-from telegram_api_helpers import stop_all_group_notifications
+from db_manage.db_helpers import remove_group_from_db, trigger_group_bot_status
+from helpers.telegram_api_helpers import stop_all_group_notifications
 
 def get_status_change(chat_member_update: ChatMemberUpdated) -> Optional[Tuple[bool, bool]]:
     status_change = chat_member_update.difference().get("status")

@@ -3,8 +3,8 @@ from telegram.ext import CallbackContext, ConversationHandler
 
 import time
 
-from bot_types import NOTIFICATION_INFO
-from db_helpers import add_notification_to_table
+from helpers.bot_types import NOTIFICATION_INFO
+from db_manage.db_helpers import add_notification_to_table
 
 create_notification_stages = {
   'command': 'create_notification',

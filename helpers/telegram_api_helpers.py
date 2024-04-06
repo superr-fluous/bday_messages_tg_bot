@@ -3,7 +3,7 @@ from telegram.ext import CallbackContext, ContextTypes
 import logging
 from datetime import datetime
 
-from bot_types import NOTIFICATION_INFO, NOTIFICATION_INFO_ROW
+from helpers.bot_types import NOTIFICATION_INFO, NOTIFICATION_INFO_ROW
 
 ### Отправка поздравдения в группу
 async def send_message(context: CallbackContext) -> None:

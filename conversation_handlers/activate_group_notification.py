@@ -3,10 +3,10 @@ from telegram.ext import CallbackContext, ConversationHandler
 
 import time
 
-from bot_types import GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
-from db_helpers import add_group_to_notifications_db, add_notification_to_group_db, get_group_row_by_id, get_group_row_by_name, get_notification_row_by_id, get_notification_row_by_name, get_rows_from_ids
+from helpers.bot_types import GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
+from db_manage.db_helpers import add_group_to_notifications_db, add_notification_to_group_db, get_group_row_by_id, get_group_row_by_name, get_notification_row_by_id, get_notification_row_by_name, get_rows_from_ids
 from helpers.helpers import return_notifications_list
-from telegram_api_helpers import start_notification_job
+from helpers.telegram_api_helpers import start_notification_job
 
 activate_group_notification = {
   'command': 'activate_group_notification',

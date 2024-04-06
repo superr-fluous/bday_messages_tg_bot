@@ -1,6 +1,7 @@
 import sqlite3
 from dotenv import dotenv_values
 
+
 bot_config = dotenv_values(".env")
 db_filename = bot_config.get('DB_FILENAME')
 

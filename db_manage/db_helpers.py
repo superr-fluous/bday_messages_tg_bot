@@ -1,6 +1,6 @@
 import sqlite3
 
-from bot_types import GROUP_INFO_ROWS, GROUP_INFO_ROW, NOTIFICATION_INFO_ROW, NOTIFICATION_INFO_ROWS, NOTIFICATION_INFO, GROUP_INFO
+from helpers.bot_types import GROUP_INFO_ROWS, GROUP_INFO_ROW, NOTIFICATION_INFO_ROW, NOTIFICATION_INFO_ROWS, NOTIFICATION_INFO, GROUP_INFO
 from dotenv import dotenv_values
 
 from typing import List, Literal
