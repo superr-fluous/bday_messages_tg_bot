@@ -1,4 +1,5 @@
 from telegram.ext import CallbackContext, ContextTypes
+from zoneinfo import ZoneInfo
 
 import logging
 from datetime import datetime
@@ -30,7 +31,7 @@ def start_notification_job(context: CallbackContext, notification_info: NOTIFICA
 
   # try:
   print(f"Начинаю регистрацию отправки сообщения в {group_id}")
-  date_object = datetime.fromisoformat(date)
+  date_object = datetime.fromisoformat(date).replace(tzinfo=ZoneInfo("Europe/Moscow"))
   job_name = f"{id}_{group_id}"
   
   if context.job_queue is not None:
