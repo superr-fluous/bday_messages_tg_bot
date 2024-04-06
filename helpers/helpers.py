@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 
-from bot_types import GROUP_INFO_ROWS, NOTIFICATION_INFO_ROWS, GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
+from helpers.bot_types import GROUP_INFO_ROWS, NOTIFICATION_INFO_ROWS, GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
 
 DATE_DISPLAY_FORMAT = '%d.%m.%Y %H:%M:%S'
 

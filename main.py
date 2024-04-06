@@ -8,22 +8,69 @@ from telegram.ext import (
     ChatMemberHandler,
     CallbackContext
 )
-
 from dotenv import dotenv_values
 from typing import Final
 
-from conversation_handlers.activate_group_notification import agn_group_id_name_handler, agn_notification_id_name_handler, start_activate_group_notification, activate_group_notification
-from conversation_handlers.create_notification import notification_date_handler, notification_message_handler, notification_name_handler, start_create_notification, create_notification_stages
-from conversation_handlers.delete_group import start_delete_group, dg_group_id_name, dg_confirm, delete_group_stages
-from conversation_handlers.delete_notification import dn_confirm, dn_notification_id_name, start_delete_notification, delete_notification_stages
-from conversation_handlers.disable_group_notification import dgn_group_id_name_handler, dgn_notification_id_name_handler, start_disable_group_notification, disable_group_notification
-from conversation_handlers.dispay_group_notifications import group_id_name_handler, start_display_group_notifications, display_group_notifications_stages
-from conversation_handlers.display_notification_groups import notification_id_name_handler, start_display_notification_groups, display_notification_groups_stages
-from conversation_handlers.start_group_notifications import sgn_group_id_name, start_start_group_notification, start_group_notifications_stages
-from conversation_handlers.stop_group_notifications import spgn_group_id_name, stop_group_notifications_stages
-from helpers.helpers import groups_text_list, notifications_text_list
-from db_helpers import get_all_groups_rows, get_all_notifications_rows
+from conversation_handlers.activate_group_notification import (
+    agn_group_id_name_handler,
+    agn_notification_id_name_handler,
+    start_activate_group_notification,
+    activate_group_notification
+)
+from conversation_handlers.create_notification import (
+    notification_date_handler,
+    notification_message_handler,
+    notification_name_handler,
+    start_create_notification,
+    create_notification_stages
+)
+from conversation_handlers.delete_group import (
+    start_delete_group,
+    dg_group_id_name, 
+    dg_confirm, 
+    delete_group_stages
+)
+from conversation_handlers.delete_notification import (
+    dn_confirm,
+    dn_notification_id_name,
+    start_delete_notification,
+    delete_notification_stages
+)
+from conversation_handlers.disable_group_notification import (
+    dgn_group_id_name_handler,
+    dgn_notification_id_name_handler,
+    start_disable_group_notification,
+    disable_group_notification
+)
+from conversation_handlers.dispay_group_notifications import (
+    group_id_name_handler,
+    start_display_group_notifications,
+    display_group_notifications_stages
+)
+from conversation_handlers.display_notification_groups import (
+    notification_id_name_handler,
+    start_display_notification_groups,
+    display_notification_groups_stages
+)
+from conversation_handlers.start_group_notifications import (
+    sgn_group_id_name,
+    start_start_group_notification,
+    start_group_notifications_stages
+)
+from conversation_handlers.stop_group_notifications import (
+    spgn_group_id_name,
+    stop_group_notifications_stages
+)
+from helpers.helpers import (
+    groups_text_list,
+    notifications_text_list
+)
+from db_manage.db_helpers import (
+    get_all_groups_rows,
+    get_all_notifications_rows
+)
 from other_handlers.bot_chat_status import handle_bot_chat_status
+
 
 HELP_RESPONSE: Final[str] = '''
 Чтобы использовать бота надо добавить его в группу и написать /start c тэгом бота (/stop - для остановки).
@@ -40,17 +87,18 @@ HELP_RESPONSE: Final[str] = '''
     10. /stop_group - бот не будет слать уведомления, пока не будет снова запущен
 '''
 
+
 bot_config = dotenv_values(".env")
 
 FILTER_ADMIN_PRIVATE = filters.ChatType.PRIVATE & (~ filters.User(bot_config.get('ADMIN_USERNAME'))) # type: ignore[attr-defined]
+
 
 # Архитектура
 ### 1. Хардкодится админ, все сообщения не от админа игнорируются
 ### 2. Админ может управлять ботом через личные сообщения
 ### 3. Админ может через ЛС добавлять новые оповещения, удалять существующие, включать / отключать оповещение в беседах
 
-# Прочее
-# Обработчики команд пользователя
+
 async def help_admin(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text(HELP_RESPONSE)
 
@@ -72,15 +120,11 @@ async def display_all_notifications(update: Update, context: CallbackContext) ->
 def main() -> None:
     """Запуск бота"""
     # Подключаем бота телеграм через токен
-    # try:
-    print("Бот запускается...")
     application = Application.builder().token(bot_config.get('TOKEN')).build()
 
     '''
-    2. Добавить обработку mention бота в группе
     4. Сделать логгирование в файл. В целом можно сделать нормальное логирование с параметрами, чтобы потом экспортировать логи
     5. Перенести на MongoDB
-    6. Мне не нравится структура проекта и файлов (надо бы причесать)
     7. Получить бы какой-то базовый конфиг бота
     '''
 
@@ -193,16 +237,8 @@ def main() -> None:
     )
     application.add_handler(stop_group_notifications)
 
-    async def message_base(update: Update, context: CallbackContext):
-        print(f'Message from {update.effective_chat} containing {update.effective_message}')
-
-    application.add_handler(MessageHandler(None, message_base))
-
-    # Run the bot until the user presses Ctrl-C
+    print('Бот запущен')
     application.run_polling(allowed_updates=Update.ALL_TYPES)
-    # except Exception as err:
-    #     print("Ошибка во время запуска бота")
-    #     print(f"Ошибка: {err}")
 
 if __name__ == "__main__":
     main()

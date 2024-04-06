@@ -1,9 +1,9 @@
 from telegram import Update
 from telegram.ext import CallbackContext, ConversationHandler
 
-from bot_types import GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
-from db_helpers import get_group_row_by_id, get_group_row_by_name, get_notification_row_by_id, get_notification_row_by_name, remove_group_from_notifications_db, remove_notification_from_group_db
-from telegram_api_helpers import stop_notification_job
+from helpers.bot_types import GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
+from db_manage.db_helpers import get_group_row_by_id, get_group_row_by_name, get_notification_row_by_id, get_notification_row_by_name, remove_group_from_notifications_db, remove_notification_from_group_db
+from helpers.telegram_api_helpers import stop_notification_job
 
 disable_group_notification = {
   'command': 'disable_group_notification',

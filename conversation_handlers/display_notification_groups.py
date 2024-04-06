@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram.ext import CallbackContext, ConversationHandler
 
-from bot_types import NOTIFICATION_INFO_ROW
-from db_helpers import get_notification_row_by_id, get_notification_row_by_name, get_rows_from_ids
+from helpers.bot_types import NOTIFICATION_INFO_ROW
+from db_manage.db_helpers import get_notification_row_by_id, get_notification_row_by_name, get_rows_from_ids
 from helpers.helpers import groups_text_list, return_groups_list
 
 display_notification_groups_stages = {

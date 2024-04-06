@@ -2,9 +2,9 @@ from telegram.ext import CallbackContext
 
 from typing import Literal
 
-from db_helpers import get_group_row_by_id
+from db_manage.db_helpers import get_group_row_by_id
 from helpers.helpers import return_notifications_list
-from telegram_api_helpers import start_notification_job, stop_notification_job
+from helpers.telegram_api_helpers import start_notification_job, stop_notification_job
 
 def trigger_group_notifications(context: CallbackContext, group_id: int, action: Literal['start'] | Literal['stop']) -> None:
   group_row = get_group_row_by_id(group_id)

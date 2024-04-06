@@ -1,9 +1,9 @@
 from telegram import Update
 from telegram.ext import CallbackContext, ConversationHandler
 
-from bot_types import GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
-from db_helpers import get_group_row_by_id, get_group_row_by_name, remove_group_from_db
-from telegram_api_helpers import stop_all_group_notifications
+from helpers.bot_types import GROUP_INFO_ROW, NOTIFICATION_INFO_ROW
+from db_manage.db_helpers import get_group_row_by_id, get_group_row_by_name, remove_group_from_db
+from helpers.telegram_api_helpers import stop_all_group_notifications
 
 delete_group_stages = {
   'command': 'delete_group',

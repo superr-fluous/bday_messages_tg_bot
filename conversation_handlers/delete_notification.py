@@ -1,9 +1,9 @@
 from telegram import Update
 from telegram.ext import CallbackContext, ConversationHandler
 
-from bot_types import NOTIFICATION_INFO_ROW
-from db_helpers import delete_notification_from_table, get_notification_row_by_id, get_notification_row_by_name, remove_notification_from_group_db
-from telegram_api_helpers import stop_notification_job
+from helpers.bot_types import NOTIFICATION_INFO_ROW
+from db_manage.db_helpers import delete_notification_from_table, get_notification_row_by_id, get_notification_row_by_name, remove_notification_from_group_db
+from helpers.telegram_api_helpers import stop_notification_job
 
 delete_notification_stages = {
   'command': 'delete_notification',
