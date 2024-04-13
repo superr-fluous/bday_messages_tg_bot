@@ -11,6 +11,8 @@ from telegram.ext import (
 from dotenv import dotenv_values
 from typing import Final
 
+import math
+
 from conversation_handlers.activate_group_notification import (
     agn_group_id_name_handler,
     agn_notification_id_name_handler,
@@ -71,6 +73,7 @@ from db_manage.db_helpers import (
 )
 from other_handlers.bot_chat_status import handle_bot_chat_status
 
+MAX_MESSAGE_LENGTH = 4096
 
 HELP_RESPONSE: Final[str] = '''
 Чтобы бот мог отсылать сообщения необходимо добавить его в группу и назначить ему права администратора (достаточно прав по умолчанию, все остальные можно отключить).
@@ -121,7 +124,16 @@ async def display_all_notifications(update: Update, context: CallbackContext) ->
     all_notifications = get_all_notifications_rows()
     reply_text = notifications_text_list(all_notifications)
     
-    await update.message.reply_text(reply_text)
+        # max message length <= 4096
+    #TODO: разбивка по 4096 символа с поиском влево ближайшего номера
+    message_chunks = []
+    chunks_amount = math.ceil(len(reply_text) / MAX_MESSAGE_LENGTH)
+
+    for i in range(0, chunks_amount):
+        message_chunks.append(reply_text[MAX_MESSAGE_LENGTH * i:MAX_MESSAGE_LENGTH * (i + 1)])
+
+    for chunk in message_chunks:
+        await update.message.reply_text(chunk)
 
 
 def main() -> None:
